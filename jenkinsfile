@@ -3,28 +3,28 @@ pipeline
     agent any
     stages
     {
-        stage('ContinuousDownload')
+        stage('ContinuousDownload_master')
         {
             steps
             {
                 git 'https://github.com/Rufusayam/maven12345.git'
             }
         }
-        stage('ContinuousBuild')
+        stage('ContinuousBuild_master')
         {
             steps
             {
                 sh 'mvn package'
             }
         }
-        stage('ContinuousDeployment')
+        stage('ContinuousDeployment_master')
         {
             steps
             {
                 deploy adapters: [tomcat9(credentialsId: 'e9c1796d-f721-4a0e-917b-20f16f216c85', path: '', url: 'http://172.31.81.214:8080')], contextPath: 'testapp', war: '**/*.war'
             }
         }
-        stage('ContinuousTesting')
+        stage('ContinuousTesting_master')
         {
             steps
             {
